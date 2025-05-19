@@ -37,13 +37,13 @@ FPS               = 60
 RABBIT_MOVE_INT   = 0.6         # seconds between rabbit hops
 
 # Sidebar layout tweaks
-SEED_TITLE_PAD_Y  = 20       # padding from top for "Seeds" title
-SEED_START_Y      = SEED_TITLE_PAD_Y + 24
-SEED_ROW_H        = 40       # vertical space per seed row (reduced)
+SEED_TITLE_PAD_Y  = 15       # padding from top for "Seeds" title
+SEED_START_Y      = SEED_TITLE_PAD_Y + 20
+SEED_ROW_H        = 30       # vertical space per seed row (reduced)
 SEED_KEY_X_OFF    = 10       # x‑offsets within sidebar
-SEED_EMOJI_X_OFF  = 30
-SEED_COST_X_OFF   = 80
-LEGEND_EXTRA_PAD  = 16       # gap between last seed row and legend
+SEED_EMOJI_X_OFF  = 25
+SEED_COST_X_OFF   = 60
+LEGEND_EXTRA_PAD  = 12       # gap between last seed row and legend
 
 # ──────────────────────────────── CROP DATA ──────────────────────────────── #
 @dataclass(frozen=True)
@@ -95,8 +95,8 @@ class TinyTractorTycoon:
         self.ui_font    = pygame.font.SysFont(None, 24)
         self.small_font = pygame.font.SysFont(None, 18)
         # Smaller fonts for sidebar
-        self.sidebar_emoji_font = pygame.font.SysFont(emoji_font_name, 32) if emoji_font_name else pygame.font.SysFont(None, 32)
-        self.sidebar_ui_font = pygame.font.SysFont(None, 20)
+        self.sidebar_emoji_font = pygame.font.SysFont(emoji_font_name, 24) if emoji_font_name else pygame.font.SysFont(None, 24)
+        self.sidebar_ui_font = pygame.font.SysFont(None, 16)
 
         # ─── Field state ───────────── #
         self.grid = [[Tile() for _ in range(ROWS)] for _ in range(COLS)]
@@ -302,8 +302,8 @@ class TinyTractorTycoon:
                                                (30, 30, 30) if c == self.selected else (180, 180, 180))
 
             self.screen.blit(key_surf, (sb_left + SEED_KEY_X_OFF, row_y))
-            self.screen.blit(emoji_surf, (sb_left + SEED_EMOJI_X_OFF, row_y - 4))
-            self.screen.blit(cost_surf, (sb_left + SEED_COST_X_OFF, row_y + 4))
+            self.screen.blit(emoji_surf, (sb_left + SEED_EMOJI_X_OFF, row_y - 2))
+            self.screen.blit(cost_surf, (sb_left + SEED_COST_X_OFF, row_y + 2))
 
         # Coin counter
         coin_text = self.ui_font.render(f"Coins: {self.coins} 💰", True, (255, 255, 255))
@@ -319,7 +319,7 @@ class TinyTractorTycoon:
             if y > WIN_H - 20:
                 break
             self.screen.blit(self.sidebar_emoji_font.render(c.emojis[3], True, (255, 255, 255)),
-                             (sb_left + 10, y - 4))
+                             (sb_left + 10, y - 2))
             count = self.small_font.render(f"x {self.harvest_log[c]}", True, (200, 200, 200))
             self.screen.blit(count, (sb_left + 45, y))
 
