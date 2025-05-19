@@ -92,6 +92,7 @@ class TinyTractorTycoon:
         # ─── Fonts ─────────────────── #
         emoji_font_name = next((f for f in pygame.font.get_fonts() if "emoji" in f), None)
         self.emoji_font = pygame.font.SysFont(emoji_font_name, 48) if emoji_font_name else pygame.font.SysFont(None, 48)
+        self.sidebar_emoji_font = pygame.font.SysFont(emoji_font_name, 32) if emoji_font_name else pygame.font.SysFont(None, 32)
         self.ui_font    = pygame.font.SysFont(None, 24)
         self.small_font = pygame.font.SysFont(None, 18)
 
@@ -294,7 +295,7 @@ class TinyTractorTycoon:
 
             # Row contents
             key_surf = self.ui_font.render(c.key, True, (30, 30, 30) if c == self.selected else (200, 200, 200))
-            emoji_surf = self.emoji_font.render(c.emojis[3], True, (30, 30, 30) if c == self.selected else (255, 255, 255))
+            emoji_surf = self.sidebar_emoji_font.render(c.emojis[3], True, (30, 30, 30) if c == self.selected else (255, 255, 255))
             cost_surf = self.small_font.render(f"{c.seed_cost} 💰", True,
                                                (30, 30, 30) if c == self.selected else (180, 180, 180))
 
@@ -315,7 +316,7 @@ class TinyTractorTycoon:
             y = harvest_title_y + 30 + i * 24
             if y > WIN_H - 24:
                 break
-            self.screen.blit(self.emoji_font.render(c.emojis[3], True, (255, 255, 255)),
+            self.screen.blit(self.sidebar_emoji_font.render(c.emojis[3], True, (255, 255, 255)),
                              (sb_left + 10, y - 6))
             count = self.small_font.render(f"x {self.harvest_log[c]}", True, (200, 200, 200))
             self.screen.blit(count, (sb_left + 50, y))
