@@ -142,10 +142,10 @@ class TinyTractorTycoon:
             if event.type == pygame.KEYDOWN:
                 match event.key:
                     case pygame.K_ESCAPE: pygame.event.post(pygame.event.Event(pygame.QUIT))
-                    case pygame.K_w: self.y = (self.y - 1) % ROWS
-                    case pygame.K_s: self.y = (self.y + 1) % ROWS
-                    case pygame.K_a: self.x = (self.x - 1) % COLS
-                    case pygame.K_d: self.x = (self.x + 1) % COLS
+                    case pygame.K_w | pygame.K_UP: self.y = (self.y - 1) % ROWS
+                    case pygame.K_s | pygame.K_DOWN: self.y = (self.y + 1) % ROWS
+                    case pygame.K_a | pygame.K_LEFT: self.x = (self.x - 1) % COLS
+                    case pygame.K_d | pygame.K_RIGHT: self.x = (self.x + 1) % COLS
                     case pygame.K_SPACE: self.handle_action(now)
                     case pygame.K_f: self.handle_fertilizer(now)
                     case _:
@@ -324,7 +324,7 @@ class TinyTractorTycoon:
             self.screen.blit(count, (sb_left + 45, y))
 
         # Help legend – placed dynamically below seed list (or above bottom)
-        legend_lines = ["WASD: move",
+        legend_lines = ["WASD/Arrows: move",
                         "SPACE: plant/harvest",
                         "1‑6: pick seed",
                         "F: fertilizer (5💰)",
